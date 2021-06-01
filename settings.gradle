@@ -1,0 +1,6 @@
+include ':demo-kotlin'
+include ':demo-android-lib'
+include ':demo-android-jetpack'
+include ':demo-android-component'
+include ':app-demo'
+rootProject.name = "AndroidDemo"

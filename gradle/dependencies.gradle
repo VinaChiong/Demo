@@ -1,0 +1,47 @@
+
+/******************************************************
+ * 定义库版本号变量
+ ******************************************************/
+ext.versions = [
+    lifecycle : '2.3.1'
+]
+
+
+/******************************************************
+ * 定义库的依赖声明变量
+ ******************************************************/
+ext.deps = [
+    kotlin : [
+        "kotlin_stdlib": "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    ],
+
+    kotlinx: [
+        "coroutine_core": "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3",
+        "coroutine_android": "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3"
+    ],
+
+    androidx: [
+        "core": 'androidx.core:core-ktx:1.5.0',
+        "appcompat": 'androidx.appcompat:appcompat:1.3.0',
+        "lifecycle":[
+            "common": "androidx.lifecycle:lifecycle-common:${versions.lifecycle}",
+            "livedata_ktx": "androidx.lifecycle:lifecycle-livedata-ktx:${versions.lifecycle}",
+            "livedata_core_ktx":"androidx.lifecycle:lifecycle-livedata-core-ktx:${versions.lifecycle}",
+            "viewmodel_ktx":"androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.lifecycle}"
+        ],
+        "startup_runtime": "androidx.startup:startup-runtime:1.0.0",
+        "datastore": "androidx.datastore:datastore:1.0.0-beta01",
+        "constraintlayout": "androidx.constraintlayout:constraintlayout:2.0.4",
+        "material":'com.google.android.material:material:1.3.0',
+
+        "test": [
+            "ext_junit": 'androidx.test.ext:junit:1.1.2',
+            "espresso_core": 'androidx.test.espresso:espresso-core:3.3.0'
+        ]
+    ],
+
+    "junit": "junit:junit:4.+"
+]
+
+
+
