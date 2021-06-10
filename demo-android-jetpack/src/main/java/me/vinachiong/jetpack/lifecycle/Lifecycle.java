@@ -1,53 +1,50 @@
-package me.vinachiong.androidlib.jetpack.lifecycle;
-
-import java.util.concurrent.atomic.AtomicReference;
+package me.vinachiong.jetpack.lifecycle;
 
 /**
+ * 【手动仿写Lifecycle系列】
+ * '生命周期'的抽象类。从Activity中提出具体的类型。
+ * 通过接收 LifecycleOwner 发送的 Event 进行感知，并更新自己的状态。
+ * 同时允许外部
+ *
  * @author vina.chiong
  * @version v1.0.0
  */
 public abstract class Lifecycle {
-    /**
-     * Lifecycle coroutines extensions stashes the CoroutineScope into this field.
-     *
-     * @hide used by lifecycle-common-ktx
-     */
-    AtomicReference<Object> mInternalScopeRef = new AtomicReference<>();
+//    /**
+//     * Lifecycle 协程扩展 用于stashes CoroutineScope
+//     *
+//     * @hide used by lifecycle-common-ktx
+//     */
+//    AtomicReference<Object> mInternalScopeRef = new AtomicReference<>();
 
     /**
-     * Adds a LifecycleObserver that will be notified when the LifecycleOwner changes
-     * state.
-     * <p>
-     * The given observer will be brought to the current state of the LifecycleOwner.
-     * For example, if the LifecycleOwner is in {@link State#STARTED} state, the given observer
-     * will receive {@link Event#ON_CREATE}, {@link Event#ON_START} events.
+     *
+     * 接收注册「LC事件的观察者」。并且只有在Owner状态活跃时候，才会分发事件
      *
      * @param observer The observer to notify.
      */
     public abstract void addObserver(LifecycleObserver observer);
 
     /**
-     * Removes the given observer from the observers list.
-     * <p>
-     * If this method is called while a state change is being dispatched,
-     * <ul>
-     * <li>If the given observer has not yet received that event, it will not receive it.
-     * <li>If the given observer has more than 1 method that observes the currently dispatched
-     * event and at least one of them received the event, all of them will receive the event and
-     * the removal will happen afterwards.
-     * </ul>
+     * 尝试移除具体的「LC事件的观察者」，并解除相关引用，避免内存泄漏
      *
      * @param observer The observer to be removed.
      */
     public abstract void removeObserver(LifecycleObserver observer);
 
     /**
-     * Returns the current state of the Lifecycle.
+     * 当前 LC 的状态
      *
      * @return The current state of the Lifecycle.
      */
     public abstract State getCurrentState();
 
+    /**
+     * LC 的事件枚举类
+     * 组件内流通的数据。
+     * 是观察者模式得以实现的重要基础
+     *
+     */
     public enum Event {
         /**
          * Constant for onCreate event of the {@link LifecycleOwner}.
@@ -190,16 +187,13 @@ public abstract class Lifecycle {
     @SuppressWarnings("WeakerAccess")
     public enum State {
         DESTROYED,
-
         INITIALIZED,
-
         CREATED,
         STARTED,
-
         RESUMED;
 
         /**
-         * Compares if this State is greater or equal to the given {@code state}.
+         * 根据枚举类中的 ordinal数值进行大小比较。
          *
          * @param state State to compare with
          * @return true if this State is greater or equal to the given {@code state}

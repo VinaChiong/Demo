@@ -1,4 +1,4 @@
-package me.vinachiong.androidlib.jetpack.lifecycle;
+package me.vinachiong.jetpack.lifecycle;
 
 /**
  * @author vina.chiong

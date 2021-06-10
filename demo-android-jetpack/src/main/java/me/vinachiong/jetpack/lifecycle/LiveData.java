@@ -1,13 +1,9 @@
-package me.vinachiong.androidlib.jetpack.livedata;
+package me.vinachiong.jetpack.lifecycle;
 
 
 import java.util.HashMap;
 
-import me.vinachiong.androidlib.jetpack.lifecycle.Lifecycle;
-import me.vinachiong.androidlib.jetpack.lifecycle.LifecycleEventObserver;
-import me.vinachiong.androidlib.jetpack.lifecycle.LifecycleOwner;
-
-import static me.vinachiong.androidlib.jetpack.lifecycle.Lifecycle.State.DESTROYED;
+import static me.vinachiong.jetpack.lifecycle.Lifecycle.State.DESTROYED;
 
 /**
  * 存储值，并且支持通知，值的观察者，值的变更情况
@@ -22,8 +18,7 @@ public abstract class LiveData<T> {
     static final int START_VERSION = -1;
     static final Object NOT_SET = new Object();
     final Object mDataLock = new Object();
-    private HashMap<Observer<? super T>, ObserverWrapper> mObservers =
-            new HashMap<>();
+    private HashMap<Observer<? super T>, ObserverWrapper> mObservers = new HashMap<>();
     private int mActiveCount;
 
     private volatile Object mData;
