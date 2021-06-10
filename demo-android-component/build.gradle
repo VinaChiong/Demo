@@ -14,9 +14,9 @@ android {
         targetSdkVersion 30
     }
 
-    buildFeatures {
-        viewBinding true
-    }
+//    buildFeatures {
+//        viewBinding true
+//    }
 
     buildTypes {
         release {
